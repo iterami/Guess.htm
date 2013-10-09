@@ -60,8 +60,8 @@ window.onkeydown = function(e){
 	var key = window.event ? event : e;
 	key = key.charCode ? key.charCode : key.keyCode;
 
-	// G key = guess
-	if(key == 71){
+	// ENTER key = guess
+	if(key == 13){
 		guess();
 
 	// N key = new game
