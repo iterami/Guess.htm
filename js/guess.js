@@ -51,7 +51,7 @@ function new_game(){
 
 function message(){
 	// reset the info message
-	get('info').innerHTML = 'I am thinking of a number between 0 and 1000000. Guess!';
+	get('info').innerHTML = 'I am thinking of a number between 0 and 1 000 000. Guess!';
 }
 
 var value = 0;
