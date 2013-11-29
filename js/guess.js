@@ -52,7 +52,7 @@ function set_max(){
         'Enter max value:',
         get('guess-max').value
     );
-    get('guess-max').value = isNaN(temp)
+    get('guess-max').value = isNaN(temp) || temp.length < 1
         ? 1000000
         : temp;
 
