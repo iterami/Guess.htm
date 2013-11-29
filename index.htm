@@ -3,11 +3,12 @@
 <title>Guess</title>
 <link href=css/guess.css rel=stylesheet>
 
-<input id=guess_input>
-<input id=guess_button onclick=guess() type=button value="Guess (ENTER)">
+<input id=guess-input>
+<input id=guess-button onclick=guess() type=button value="Guess (ENTER)">
 <input onclick=new_game() type=button value="New Game (N)">
 <hr>
 <div id=info></div>
+I am thinking of a number between 1 and <input id=guess-max onclick=set_max() type=button value=1000000>, inclusive. Guess!<br>
 Guesses: <span id=guesses>0</span>
 
 <script src=js/guess.js></script>
