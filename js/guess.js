@@ -1,60 +1,57 @@
-function get(i){
-    return document.getElementById(i);
-}
-
 function guess(){
     // only allow guesses if the guess button is not disabled
-    if(!get('guess-button').disabled){
+    if(!document.getElementById('guess-button').disabled){
         // if the guess is not a number or not in guessing range
-        if(isNaN(get('guess-input').value)
-         || get('guess-input').value.length < 1
-         || get('guess-input').value < 1
-         || get('guess-input').value > get('guess-max').value){
-            get('info').innerHTML = 'You must enter an integer between 1 and ' + get('guess-max').value + ', inclusive.';
+        if(isNaN(document.getElementById('guess-input').value)
+         || document.getElementById('guess-input').value.length < 1
+         || document.getElementById('guess-input').value < 1
+         || document.getElementById('guess-input').value > document.getElementById('guess-max').value){
+            document.getElementById('info').innerHTML = 'You must enter an integer between 1 and '
+              + document.getElementById('guess-max').value + ', inclusive.';
 
         }else{
             // check if valid guess is lower than value
-            if(get('guess-input').value > value){
-                get('info').innerHTML = 'LOWER';
+            if(document.getElementById('guess-input').value > value){
+                document.getElementById('info').innerHTML = 'LOWER';
 
             // check if valid guess is higher than value
-            }else if(get('guess-input').value < value){
-                get('info').innerHTML = 'HIGHER';
+            }else if(document.getElementById('guess-input').value < value){
+                document.getElementById('info').innerHTML = 'HIGHER';
 
             // only option left is guess is correct
             }else{
                 // disable guess button to prevent further guesses
-                get('guess-button').disabled = 1;
+                document.getElementById('guess-button').disabled = 1;
 
                 // update info with victory message
-                get('info').innerHTML = 'CORRECT! YOU WIN!';
+                document.getElementById('info').innerHTML = 'CORRECT! YOU WIN!';
             }
 
-            get('guesses').innerHTML = parseInt(get('guesses').innerHTML) + 1;
+            document.getElementById('guesses').innerHTML = parseInt(document.getElementById('guesses').innerHTML) + 1;
         }
     }
 }
 
 function new_game(){
     // reset number of guesses
-    get('guesses').innerHTML = 0;
+    document.getElementById('guesses').innerHTML = 0;
 
     // enable guess button to allow more gueses
-    get('guess-button').disabled = 0;
+    document.getElementById('guess-button').disabled = 0;
 
     // generate new value to guess
-    value = Math.floor(Math.random() * get('guess-max').value) + 1;
+    value = Math.floor(Math.random() * document.getElementById('guess-max').value) + 1;
 }
 
 function set_max(){
     // set a new maximum guess value
     var temp = prompt(
-        'Enter max value:',
-        get('guess-max').value
+      'Enter max value:',
+      document.getElementById('guess-max').value
     );
-    get('guess-max').value = isNaN(temp) || temp.length < 1
-        ? 1000000
-        : temp;
+    document.getElementById('guess-max').value = isNaN(temp) || temp.length < 1
+      ? 1000000
+      : temp;
 
     new_game();
 }
