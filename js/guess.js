@@ -34,18 +34,21 @@ function guess(){
     }
 }
 
-function new_game(){
+function new_game(skip_confirm){
     // clear guess input
     document.getElementById('guess-input').value = '';
 
-    // reset number of guesses
-    document.getElementById('guesses').innerHTML = 0;
+    if(skip_confirm
+      || confirm('Start new game?')){
+        // reset number of guesses
+        document.getElementById('guesses').innerHTML = 0;
 
-    // enable guess button to allow more gueses
-    document.getElementById('guess-button').disabled = 0;
+        // enable guess button to allow more gueses
+        document.getElementById('guess-button').disabled = 0;
 
-    // generate new value to guess
-    value = Math.floor(Math.random() * document.getElementById('guess-max').value) + 1;
+        // generate new value to guess
+        value = Math.floor(Math.random() * document.getElementById('guess-max').value) + 1;
+    }
 }
 
 function set_max(){
@@ -58,7 +61,7 @@ function set_max(){
       ? 1000000
       : temp;
 
-    new_game();
+    new_game(true);
 }
 
 var value = 0;
@@ -73,10 +76,10 @@ window.onkeyup = function(e){
 
     // N key = new game
     }else if(key === 78){
-        new_game();
+        new_game(false);
     }
 };
 
 window.onload = function(e){
-    new_game();
+    new_game(true);
 };
