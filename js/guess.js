@@ -5,11 +5,13 @@ function guess(){
     if(!document.getElementById('guess-button').disabled){
         // if the guess is not a number or not in guessing range
         if(isNaN(document.getElementById('guess-input').value)
-         || document.getElementById('guess-input').value.length < 1
-         || guessvalue < 1
-         || guessvalue > parseInt(document.getElementById('guess-max').value)){
-            document.getElementById('info').innerHTML = 'You must enter an integer between 1 and '
-              + document.getElementById('guess-max').value + ', inclusive.';
+          || document.getElementById('guess-input').value.length < 1
+          || guessvalue < 1
+          || guessvalue > parseInt(document.getElementById('guess-max').value)){
+            document.getElementById('info').innerHTML =
+              'You must enter an integer between 1 and '
+              + document.getElementById('guess-max').value
+              + ', inclusive.';
 
         }else{
             // check if valid guess is lower than value
@@ -23,7 +25,7 @@ function guess(){
             // only option left is guess is correct
             }else{
                 // disable guess button to prevent further guesses
-                document.getElementById('guess-button').disabled = 1;
+                document.getElementById('guess-button').disabled = true;
 
                 // update info with victory message
                 document.getElementById('info').innerHTML = 'CORRECT! YOU WIN!';
@@ -44,7 +46,7 @@ function new_game(skip_confirm){
         document.getElementById('guesses').innerHTML = 0;
 
         // enable guess button to allow more gueses
-        document.getElementById('guess-button').disabled = 0;
+        document.getElementById('guess-button').disabled = false;
 
         // generate new value to guess
         value = Math.floor(Math.random() * document.getElementById('guess-max').value) + 1;
