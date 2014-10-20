@@ -37,11 +37,12 @@ function guess(){
 }
 
 function new_game(skip_confirm){
-    // clear guess input
-    document.getElementById('guess-input').value = '';
-
     if(skip_confirm
       || confirm('Start new game?')){
+        // clear guess input
+        document.getElementById('guess-input').value = '';
+        document.getElementById('info').innerHTML = '';
+
         // reset number of guesses
         document.getElementById('guesses').innerHTML = 0;
 
