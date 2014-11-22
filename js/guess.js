@@ -72,8 +72,7 @@ function set_max(){
 var value = 0;
 
 window.onkeyup = function(e){
-    var key = window.event ? event : e;
-    key = key.charCode ? key.charCode : key.keyCode;
+    var key = e.keyCode || e.which;
 
     // ENTER: guess.
     if(key === 13){
