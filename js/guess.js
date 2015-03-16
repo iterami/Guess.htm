@@ -18,6 +18,8 @@ function guess(){
         return;
     }
 
+    document.getElementById('guess-input').value = guessvalue;
+
     // Check if valid guess is lower than value.
     if(guessvalue > value){
         document.getElementById('info').innerHTML = 'LOWER';
@@ -39,21 +41,23 @@ function guess(){
 }
 
 function new_game(skip_confirm){
-    if(skip_confirm
-      || confirm('Start new game?')){
-        // Clear guess input.
-        document.getElementById('guess-input').value = '';
-        document.getElementById('info').innerHTML = '';
-
-        // Reset number of guesses.
-        document.getElementById('guesses').innerHTML = 0;
-
-        // Enable guess button to allow more gueses.
-        document.getElementById('guess-button').disabled = false;
-
-        // Generate new value to guess.
-        value = Math.floor(Math.random() * document.getElementById('guess-max').value) + 1;
+    if(!skip_confirm
+      && confirm('Start new game?')){
+        return;
     }
+
+    // Clear guess input.
+    document.getElementById('guess-input').value = '';
+    document.getElementById('info').innerHTML = '';
+
+    // Reset number of guesses.
+    document.getElementById('guesses').innerHTML = 0;
+
+    // Enable guess button to allow more gueses.
+    document.getElementById('guess-button').disabled = false;
+
+    // Generate new value to guess.
+    value = Math.floor(Math.random() * document.getElementById('guess-max').value) + 1;
 }
 
 function set_max(){

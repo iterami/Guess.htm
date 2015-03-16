@@ -6,10 +6,11 @@
 
 <input id=guess-input>
 <input id=guess-button onclick=guess() type=button value="Guess [ENTER]">
-<input onclick=new_game(false) type=button value="[N]ew Game">
+<input onclick=new_game(false) type=button value="New Game [N]">
 <hr>
 <div id=info></div>
-I am thinking of a number between 1 and <input id=guess-max onclick=set_max() type=button value=1000000>, inclusive. Guess!<br>
+<hr>
+I am thinking of an integer between 1 and <input id=guess-max onclick=set_max() type=button value=1000000>, inclusive. Guess!<br>
 Guesses: <span id=guesses>0</span>
 
 <script src=js/guess.js></script>
