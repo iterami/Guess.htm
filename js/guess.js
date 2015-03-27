@@ -62,7 +62,7 @@ function new_game(skip_confirm){
 
 function set_max(){
     // Set a new maximum guess value.
-    var temp = prompt(
+    var temp = window.prompt(
       'Enter max value:',
       document.getElementById('guess-max').value
     );
