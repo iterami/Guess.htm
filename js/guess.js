@@ -40,9 +40,9 @@ function guess(){
     document.getElementById('guesses').innerHTML = parseInt(document.getElementById('guesses').innerHTML) + 1;
 }
 
-function new_game(skip_confirm){
-    if(!skip_confirm
-      && confirm('Start new game?')){
+function new_game(skip){
+    if(!skip
+      && window.confirm('Start new game?')){
         return;
     }
 
