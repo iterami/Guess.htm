@@ -1,3 +1,5 @@
+'use strict';
+
 function guess(){
     var guessvalue = parseInt(document.getElementById('guess-input').value);
 
@@ -66,6 +68,10 @@ function set_max(){
       'Enter max value:',
       document.getElementById('guess-max').value
     );
+    if(temp == null){
+        return;
+    }
+
     document.getElementById('guess-max').value = isNaN(temp) || temp.length < 1
       ? 1000000
       : temp;
