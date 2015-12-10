@@ -8,15 +8,15 @@ function guess(){
         return;
     }
 
+    var guess_max = parseInt(document.getElementById('guess-max').value);
+
     // If the guess is not a number or not in guessing range.
-    if(isNaN(document.getElementById('guess-input').value)
-      || document.getElementById('guess-input').value.length < 1
+    if(isNaN(guessvalue)
+      || guessvalue.length < 1
       || guessvalue < 1
-      || guessvalue > parseInt(document.getElementById('guess-max').value)){
+      || guessvalue > guess_max){
         document.getElementById('info').innerHTML =
-          'You must enter an integer between 1 and '
-          + document.getElementById('guess-max').value
-          + ', inclusive.';
+          'You must enter an integer between 1 and ' + guess_max + ', inclusive.';
         return;
     }
 
