@@ -10,7 +10,9 @@
 <hr>
 <div id=info></div>
 <hr>
-I am thinking of an integer between 1 and <input id=guess-max onclick=set_max() type=button value=1000000>, inclusive. Guess!<br>
+I am thinking of an integer between <input id=guess-min onclick=set_value('min') type=button value=1>
+and
+<input id=guess-max onclick=set_value('max') type=button value=1000000>, inclusive. Guess!<br>
 Guesses: <span id=guesses>0</span>
 
 <script src=js/guess.js></script>

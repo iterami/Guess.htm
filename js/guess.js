@@ -9,14 +9,15 @@ function guess(){
     }
 
     var guess_max = parseInt(document.getElementById('guess-max').value);
+    var guess_min = parseInt(document.getElementById('guess-min').value);
 
     // If the guess is not a number or not in guessing range.
     if(isNaN(guessvalue)
       || guessvalue.length < 1
-      || guessvalue < 1
+      || guessvalue < guess_min
       || guessvalue > guess_max){
         document.getElementById('info').innerHTML =
-          'You must enter an integer between 1 and ' + guess_max + ', inclusive.';
+          'You must enter an integer between ' + guess_min + ' and ' + guess_max + ', inclusive.';
         return;
     }
 
@@ -44,7 +45,7 @@ function guess(){
 
 function new_game(skip){
     if(!skip
-      && window.confirm('Start new game?')){
+      && !window.confirm('Start new game?')){
         return;
     }
 
@@ -59,21 +60,27 @@ function new_game(skip){
     document.getElementById('guess-button').disabled = false;
 
     // Generate new value to guess.
-    value = Math.floor(Math.random() * document.getElementById('guess-max').value) + 1;
+    var min_value = parseInt(document.getElementById('guess-min').value);
+    value = Math.floor(
+      Math.random()
+        * (parseInt(document.getElementById('guess-max').value) - min_value)
+    ) + min_value;
 }
 
-function set_max(){
+function set_value(type){
     // Set a new maximum guess value.
     var temp = window.prompt(
-      'Enter max value:',
-      document.getElementById('guess-max').value
+      'Enter ' + type + ' value:',
+      document.getElementById('guess-' + type).value
     );
     if(temp == null){
         return;
     }
 
-    document.getElementById('guess-max').value = isNaN(temp) || temp.length < 1
-      ? 1000000
+    document.getElementById('guess-' + type).value = isNaN(temp) || temp.length < 1
+      ? (type === 'min'
+        ? 1
+        : 1000000)
       : temp;
 
     new_game(true);
