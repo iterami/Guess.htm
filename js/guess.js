@@ -1,15 +1,24 @@
 'use strict';
 
 function guess(){
-    var guessvalue = parseInt(document.getElementById('guess-input').value);
+    var guessvalue = parseInt(
+      document.getElementById('guess-input').value,
+      10
+    );
 
     // Only allow guesses if the guess button is not disabled.
     if(document.getElementById('guess-button').disabled){
         return;
     }
 
-    var guess_max = parseInt(document.getElementById('guess-max').value);
-    var guess_min = parseInt(document.getElementById('guess-min').value);
+    var guess_max = parseInt(
+      document.getElementById('guess-max').value,
+      10
+    );
+    var guess_min = parseInt(
+      document.getElementById('guess-min').value,
+      10
+    );
 
     // If the guess is not a number or not in guessing range.
     if(isNaN(guessvalue)
@@ -40,7 +49,10 @@ function guess(){
         document.getElementById('info').innerHTML = 'CORRECT! YOU WIN!';
     }
 
-    document.getElementById('guesses').innerHTML = parseInt(document.getElementById('guesses').innerHTML) + 1;
+    document.getElementById('guesses').innerHTML = parseInt(
+      document.getElementById('guesses').innerHTML,
+      10
+    ) + 1;
 }
 
 function new_game(skip){
@@ -60,10 +72,13 @@ function new_game(skip){
     document.getElementById('guess-button').disabled = false;
 
     // Generate new value to guess.
-    var min_value = parseInt(document.getElementById('guess-min').value);
+    var min_value = parseInt(
+      document.getElementById('guess-min').value,
+      10
+    );
     value = Math.floor(
       Math.random()
-        * (parseInt(document.getElementById('guess-max').value) - min_value)
+        * (parseInt(document.getElementById('guess-max').value, 10) - min_value)
     ) + min_value;
 }
 
