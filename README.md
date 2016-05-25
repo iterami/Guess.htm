@@ -9,3 +9,8 @@ Action         | Key
 ---------------|------
 Guess          | ENTER
 Start New Game | N
+
+---
+
+Requires:
+* [iterami/common](https://github.com/iterami/common)
