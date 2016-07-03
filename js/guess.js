@@ -1,15 +1,14 @@
 'use strict';
 
 function guess(){
+    if(!guessing){
+        return;
+    }
+
     var guessvalue = parseInt(
       document.getElementById('guess-input').value,
       10
     );
-
-    // Only allow guesses if the guess button is not disabled.
-    if(document.getElementById('guess-button').disabled){
-        return;
-    }
 
     var guess_max = parseInt(
       document.getElementById('guess-max').value,
@@ -42,8 +41,7 @@ function guess(){
 
     // Only option left is guess is correct.
     }else{
-        // Disable guess button to prevent further guesses.
-        document.getElementById('guess-button').disabled = true;
+        guessing = false;
 
         // Update info with victory message.
         document.getElementById('info').innerHTML = 'CORRECT! YOU WIN!';
@@ -61,15 +59,14 @@ function new_game(skip){
         return;
     }
 
+    guessing = true;
+
     // Clear guess input.
     document.getElementById('guess-input').value = '';
     document.getElementById('info').innerHTML = '';
 
     // Reset number of guesses.
     document.getElementById('guesses').innerHTML = 0;
-
-    // Enable guess button to allow more gueses.
-    document.getElementById('guess-button').disabled = false;
 
     // Generate new value to guess.
     var min_value = parseInt(
@@ -101,6 +98,7 @@ function set_value(type){
     new_game(true);
 }
 
+var guessing = true;
 var value = 0;
 
 window.onkeyup = function(e){
