@@ -73,10 +73,8 @@ function new_game(skip){
       document.getElementById('guess-min').value,
       10
     );
-    value = Math.floor(
-      Math.random()
-        * (parseInt(document.getElementById('guess-max').value, 10) - min_value)
-    ) + min_value;
+    value = random_integer(parseInt(document.getElementById('guess-max').value, 10) - min_value)
+      + min_value;
 }
 
 function set_value(type){
