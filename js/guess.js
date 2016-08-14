@@ -5,11 +5,6 @@ function guess(){
         return;
     }
 
-    var guessvalue = parseInt(
-      document.getElementById('guess-input').value,
-      10
-    );
-
     var guess_max = parseInt(
       document.getElementById('guess-max').value,
       10
@@ -18,39 +13,43 @@ function guess(){
       document.getElementById('guess-min').value,
       10
     );
+    var guessvalue = parseInt(
+      document.getElementById('guess-input').value,
+      10
+    );
 
     // If the guess is not a number or not in guessing range.
     if(isNaN(guessvalue)
       || guessvalue.length < 1
-      || guessvalue < guess_min
-      || guessvalue > guess_max){
+      || guessvalue > guess_max
+      || guessvalue < guess_min){
         document.getElementById('info').innerHTML =
           'You must enter an integer between ' + guess_min + ' and ' + guess_max + ', inclusive.';
         return;
     }
 
     document.getElementById('guess-input').value = guessvalue;
+    var result = '';
 
     // Check if valid guess is lower than value.
     if(guessvalue > value){
-        document.getElementById('info').innerHTML = 'LOWER';
+        result = 'LOWER';
 
     // Check if valid guess is higher than value.
     }else if(guessvalue < value){
-        document.getElementById('info').innerHTML = 'HIGHER';
+        result = 'HIGHER';
 
     // Only option left is guess is correct.
     }else{
         guessing = false;
-
-        // Update info with victory message.
-        document.getElementById('info').innerHTML = 'CORRECT! YOU WIN!';
+        result = 'CORRECT! YOU WIN!';
     }
 
     document.getElementById('guesses').innerHTML = parseInt(
       document.getElementById('guesses').innerHTML,
       10
     ) + 1;
+    document.getElementById('info').innerHTML = result;
 }
 
 function new_game(skip){
@@ -59,14 +58,10 @@ function new_game(skip){
         return;
     }
 
-    guessing = true;
-
-    // Clear guess input.
     document.getElementById('guess-input').value = '';
-    document.getElementById('info').innerHTML = '';
-
-    // Reset number of guesses.
     document.getElementById('guesses').innerHTML = 0;
+    document.getElementById('info').innerHTML = '';
+    guessing = true;
 
     // Generate new value to guess.
     var min_value = parseInt(
@@ -99,19 +94,19 @@ function set_value(type){
 var guessing = true;
 var value = 0;
 
-window.onkeyup = function(e){
-    var key = e.keyCode || e.which;
-
-    // ENTER: guess.
-    if(key === 13){
-        guess();
-
-    // N: new game.
-    }else if(key === 78){
-        new_game(false);
-    }
-};
-
 window.onload = function(e){
+    input_init(
+      {
+        13: {
+          'todo': guess,
+        },
+        78: {
+          'todo': function(){
+              new_game(false);
+          },
+        },
+      }
+    );
+
     new_game(true);
 };
