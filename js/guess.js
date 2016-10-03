@@ -109,4 +109,15 @@ window.onload = function(e){
     );
 
     new_game(true);
+
+    document.getElementById('guess-button').onclick = guess;
+    document.getElementById('guess-max').onclick = function(){
+        set_value('max');
+    };
+    document.getElementById('guess-min').onclick = function(){
+        set_value('min');
+    };
+    document.getElementById('new-game').onclick = function(){
+        new_game(false);
+    };
 };
