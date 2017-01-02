@@ -96,8 +96,8 @@ var guessing = true;
 var value = 0;
 
 window.onload = function(e){
-    input_init(
-      {
+    input_init({
+      'keybinds': {
         13: {
           'todo': guess,
         },
@@ -106,8 +106,8 @@ window.onload = function(e){
               new_game(false);
           },
         },
-      }
-    );
+      },
+    });
 
     new_game(true);
 
