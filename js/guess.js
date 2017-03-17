@@ -5,14 +5,6 @@ function guess(){
         return;
     }
 
-    var guess_max = parseInt(
-      document.getElementById('guess-max').value,
-      10
-    );
-    var guess_min = parseInt(
-      document.getElementById('guess-min').value,
-      10
-    );
     var guessvalue = parseInt(
       document.getElementById('guess-input').value,
       10
@@ -21,10 +13,10 @@ function guess(){
     // If the guess is not a number or not in guessing range.
     if(isNaN(guessvalue)
       || guessvalue.length < 1
-      || guessvalue > guess_max
-      || guessvalue < guess_min){
+      || guessvalue > max
+      || guessvalue < min){
         document.getElementById('info').innerHTML =
-          'You must enter an integer between ' + guess_min + ' and ' + guess_max + ', inclusive.';
+          'You must enter an integer between ' + min + ' and ' + max + ', inclusive.';
         return;
     }
 
@@ -64,35 +56,31 @@ function new_game(skip){
     guessing = true;
 
     // Generate new value to guess.
-    var min_value = parseInt(
-      document.getElementById('guess-min').value,
-      10
-    );
     value = random_integer({
-      'max': parseInt(document.getElementById('guess-max').value, 10) - min_value,
-    }) + min_value;
+      'max': max - min
+    }) + min;
 }
 
-function set_value(type){
-    // Set a new maximum guess value.
-    var temp = window.prompt(
-      'Enter ' + type + ' value:',
-      document.getElementById('guess-' + type).value
-    );
-    if(temp == null){
-        return;
-    }
+function set_value(){
+    var newmax = parseInt(document.getElementById('guess-max').value, 10);
+    var newmin = parseInt(document.getElementById('guess-min').value, 10);
 
-    document.getElementById('guess-' + type).value = isNaN(temp) || temp.length < 1
-      ? (type === 'min'
-        ? 1
-        : 1000000)
-      : temp;
+    if(isNan(min)){
+        min = 1;
+    }
+    if(isNan(max)){
+        max = 1000000;
+    }
+    if(min > max){
+        min = max;
+    }
 
     new_game(true);
 }
 
 var guessing = true;
+var max = 1000000;
+var min = 1;
 var value = 0;
 
 window.onload = function(e){
@@ -109,15 +97,14 @@ window.onload = function(e){
       },
     });
 
+    document.getElementById('guess-max').value = max;
+    document.getElementById('guess-min').value = min;
+
     new_game(true);
 
     document.getElementById('guess-button').onclick = guess;
-    document.getElementById('guess-max').onclick = function(){
-        set_value('max');
-    };
-    document.getElementById('guess-min').onclick = function(){
-        set_value('min');
-    };
+    document.getElementById('guess-max').oninput = set_value;
+    document.getElementById('guess-min').oninput = set_value;
     document.getElementById('new-game').onclick = function(){
         new_game(false);
     };
