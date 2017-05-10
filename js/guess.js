@@ -56,7 +56,7 @@ function new_game(skip){
     guessing = true;
 
     // Generate new value to guess.
-    value = random_integer({
+    value = core_random_integer({
       'max': max - min
     }) + min;
 }
