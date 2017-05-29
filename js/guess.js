@@ -61,30 +61,8 @@ function new_game(skip){
     }) + min;
 }
 
-function set_value(){
-    var newmax = parseInt(document.getElementById('guess-max').value, 10);
-    var newmin = parseInt(document.getElementById('guess-min').value, 10);
-
-    if(isNan(min)){
-        min = 1;
-    }
-    if(isNan(max)){
-        max = 1000000;
-    }
-    if(min > max){
-        min = max;
-    }
-
-    new_game(true);
-}
-
-var guessing = true;
-var max = 1000000;
-var min = 1;
-var value = 0;
-
-window.onload = function(e){
-    core_input_init({
+function repo_init(){
+    core_input_binds_add({
       'keybinds': {
         13: {
           'todo': guess,
@@ -108,4 +86,26 @@ window.onload = function(e){
     document.getElementById('new-game').onclick = function(){
         new_game(false);
     };
-};
+}
+
+function set_value(){
+    var newmax = parseInt(document.getElementById('guess-max').value, 10);
+    var newmin = parseInt(document.getElementById('guess-min').value, 10);
+
+    if(isNan(min)){
+        min = 1;
+    }
+    if(isNan(max)){
+        max = 1000000;
+    }
+    if(min > max){
+        min = max;
+    }
+
+    new_game(true);
+}
+
+var guessing = true;
+var max = 1000000;
+var min = 1;
+var value = 0;
