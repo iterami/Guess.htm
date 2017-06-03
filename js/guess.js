@@ -62,7 +62,7 @@ function new_game(skip){
 }
 
 function repo_init(){
-    core_input_binds_add({
+    core_events_bind({
       'keybinds': {
         13: {
           'todo': guess,
