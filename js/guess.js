@@ -63,9 +63,6 @@ function new_game(skip){
 
 function repo_init(){
     core_repo_init({
-      'title': 'Guess.htm',
-    });
-    core_events_bind({
       'keybinds': {
         13: {
           'todo': guess,
@@ -76,6 +73,7 @@ function repo_init(){
           },
         },
       },
+      'title': 'Guess.htm',
     });
 
     document.getElementById('guess-max').value = max;
