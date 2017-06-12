@@ -93,10 +93,10 @@ function set_value(){
     var newmax = parseInt(document.getElementById('guess-max').value, 10);
     var newmin = parseInt(document.getElementById('guess-min').value, 10);
 
-    if(isNan(min)){
+    if(isNaN(min)){
         min = 1;
     }
-    if(isNan(max)){
+    if(isNaN(max)){
         max = 1000000;
     }
     if(min > max){
