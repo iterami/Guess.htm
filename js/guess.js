@@ -13,10 +13,10 @@ function guess(){
     // If the guess is not a number or not in guessing range.
     if(isNaN(guessvalue)
       || guessvalue.length < 1
-      || guessvalue > max
-      || guessvalue < min){
+      || guessvalue > core_storage_data['max']
+      || guessvalue < core_storage_data['min']){
         document.getElementById('info').innerHTML =
-          'You must enter an integer between ' + min + ' and ' + max + ', inclusive.';
+          'Invalid integer.';
         return;
     }
 
@@ -57,8 +57,8 @@ function new_game(skip){
 
     // Generate new value to guess.
     value = core_random_integer({
-      'max': max - min
-    }) + min;
+      'max': core_storage_data['max'] - core_storage_data['min'],
+    }) + core_storage_data['min'];
 }
 
 function repo_init(){
@@ -73,40 +73,21 @@ function repo_init(){
           },
         },
       },
+      'storage': {
+        'max': 1000000,
+        'min': 1,
+      },
+      'storage-menu': '<table><tr><td><input id=max><td>Max<tr><td><input id=min><td>Min</table>',
       'title': 'Guess.htm',
     });
-
-    document.getElementById('guess-max').value = max;
-    document.getElementById('guess-min').value = min;
 
     new_game(true);
 
     document.getElementById('guess-button').onclick = guess;
-    document.getElementById('guess-max').oninput = set_value;
-    document.getElementById('guess-min').oninput = set_value;
     document.getElementById('new-game').onclick = function(){
         new_game(false);
     };
 }
 
-function set_value(){
-    var newmax = parseInt(document.getElementById('guess-max').value, 10);
-    var newmin = parseInt(document.getElementById('guess-min').value, 10);
-
-    if(isNaN(min)){
-        min = 1;
-    }
-    if(isNaN(max)){
-        max = 1000000;
-    }
-    if(min > max){
-        min = max;
-    }
-
-    new_game(true);
-}
-
 var guessing = true;
-var max = 1000000;
-var min = 1;
 var value = 0;
