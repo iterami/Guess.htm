@@ -2,6 +2,16 @@
 
 function repo_init(){
     core_repo_init({
+      'info-events': {
+        'guess-button': {
+          'todo': guess,
+        },
+        'new-game': {
+          'todo': function(){
+              new_game(false);
+          },
+        },
+      },
       'keybinds': {
         13: {
           'todo': guess,
@@ -21,9 +31,4 @@ function repo_init(){
     });
 
     new_game(true);
-
-    document.getElementById('guess-button').onclick = guess;
-    document.getElementById('new-game').onclick = function(){
-        new_game(false);
-    };
 }
