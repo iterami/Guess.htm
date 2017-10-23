@@ -5,9 +5,8 @@ function guess(){
         return;
     }
 
-    var element = document.getElementById('guess-input');
     var guessvalue = parseInt(
-      element.value,
+      document.getElementById('guess-input').value,
       10
     );
 
@@ -21,7 +20,6 @@ function guess(){
         return;
     }
 
-    element.value = guessvalue;
     var result = '';
 
     // Check if valid guess is lower than value.
@@ -38,7 +36,7 @@ function guess(){
         result = 'CORRECT! YOU WIN!';
     }
 
-    element = document.getElementById('guesses');
+    var element = document.getElementById('guesses');
     element.innerHTML = parseInt(
       element.innerHTML,
       10
