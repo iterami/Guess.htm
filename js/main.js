@@ -2,6 +2,10 @@
 
 function repo_init(){
     core_repo_init({
+      'globals': {
+        'guessing': true,
+        'value': 0,
+      },
       'info-events': {
         'guess-button': {
           'todo': guess,

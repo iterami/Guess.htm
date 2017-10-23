@@ -62,6 +62,3 @@ function new_game(skip){
       'max': core_storage_data['max'] - core_storage_data['min'],
     }) + core_storage_data['min'];
 }
-
-var guessing = true;
-var value = 0;
