@@ -2,19 +2,19 @@
 
 function repo_init(){
     core_repo_init({
-      'globals': {
-        'guessing': true,
-        'value': 0,
-      },
-      'info-events': {
+      'events': {
         'guess-button': {
-          'todo': guess,
+          'onclick': guess,
         },
         'new-game': {
-          'todo': function(){
+          'onclick': function(){
               new_game(false);
           },
         },
+      },
+      'globals': {
+        'guessing': true,
+        'value': 0,
       },
       'keybinds': {
         13: {
