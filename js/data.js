@@ -5,7 +5,7 @@ function guess(){
         return;
     }
 
-    var guessvalue = parseInt(
+    var guessvalue = Number.parseInt(
       document.getElementById('guess-input').value,
       10
     );
@@ -37,7 +37,7 @@ function guess(){
     }
 
     var element = document.getElementById('guesses');
-    element.innerHTML = parseInt(
+    element.innerHTML = Number.parseInt(
       element.innerHTML,
       10
     ) + 1;
