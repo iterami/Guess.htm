@@ -11,7 +11,7 @@ function guess(){
     );
 
     // If the guess is not a number or not in guessing range.
-    if(isNaN(guessvalue)
+    if(Number.isNaN(guessvalue)
       || guessvalue.length < 1
       || guessvalue > core_storage_data['max']
       || guessvalue < core_storage_data['min']){
