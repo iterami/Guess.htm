@@ -15,8 +15,7 @@ function guess(){
       || guessvalue.length < 1
       || guessvalue > core_storage_data['max']
       || guessvalue < core_storage_data['min']){
-        document.getElementById('info').innerHTML =
-          'Invalid integer.';
+        document.getElementById('info').textContent = 'Invalid integer.';
         return;
     }
 
@@ -37,11 +36,11 @@ function guess(){
     }
 
     let element = document.getElementById('guesses');
-    element.innerHTML = Number.parseInt(
-      element.innerHTML,
+    element.textContent = Number.parseInt(
+      element.textContent,
       10
     ) + 1;
-    document.getElementById('info').innerHTML = result;
+    document.getElementById('info').textContent = result;
 }
 
 function new_game(skip){
@@ -51,8 +50,8 @@ function new_game(skip){
     }
 
     document.getElementById('guess-input').value = '';
-    document.getElementById('guesses').innerHTML = 0;
-    document.getElementById('info').innerHTML = '';
+    document.getElementById('guesses').textContent = 0;
+    document.getElementById('info').textContent = '';
     guessing = true;
 
     // Generate new value to guess.
