@@ -45,7 +45,7 @@ function guess(){
 
 function new_game(skip){
     if(!skip
-      && !window.confirm('Start new game?')){
+      && !globalThis.confirm('Start new game?')){
         return;
     }
 
