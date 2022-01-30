@@ -30,8 +30,8 @@ function repo_init(){
         'max': 1000000,
         'min': 1,
       },
-      'storage-menu': '<table><tr><td><input id=max type=number><td>Max'
-        + '<tr><td><input id=min type=number><td>Min</table>',
+      'storage-menu': '<table><tr><td><input id=max step=any type=number><td>Max'
+        + '<tr><td><input id=min step=any type=number><td>Min</table>',
       'title': 'Guess.htm',
     });
 
