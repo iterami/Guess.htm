@@ -54,3 +54,41 @@ function new_game(skip){
       'max': core_storage_data['max'] - core_storage_data['min'],
     }) + core_storage_data['min'];
 }
+
+function repo_init(){
+    core_repo_init({
+      'events': {
+        'guess-button': {
+          'onclick': guess,
+        },
+        'new-game': {
+          'onclick': function(){
+              new_game(false);
+          },
+        },
+      },
+      'globals': {
+        'guessing': true,
+        'value': 0,
+      },
+      'keybinds': {
+        13: {
+          'todo': guess,
+        },
+        78: {
+          'todo': function(){
+              new_game(false);
+          },
+        },
+      },
+      'storage': {
+        'max': 1000000,
+        'min': 1,
+      },
+      'storage-menu': '<table><tr><td><input id=max step=any type=number><td>Max'
+        + '<tr><td><input id=min step=any type=number><td>Min</table>',
+      'title': 'Guess.htm',
+    });
+
+    new_game(true);
+}
