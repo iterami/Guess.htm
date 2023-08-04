@@ -10,7 +10,7 @@ function guess(){
       10
     );
 
-    if(globalThis.isNaN(guessvalue)
+    if(Number.isNaN(guessvalue)
       || guessvalue.length < 1
       || guessvalue > core_storage_data['max']
       || guessvalue < core_storage_data['min']){
