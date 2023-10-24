@@ -62,9 +62,7 @@ function repo_init(){
           'onclick': guess,
         },
         'new-game': {
-          'onclick': function(){
-              new_game(false);
-          },
+          'onclick': core_repo_reset,
         },
       },
       'globals': {
@@ -72,14 +70,12 @@ function repo_init(){
         'value': 0,
       },
       'keybinds': {
-        13: {
+        'Enter': {
           'todo': guess,
         },
-        78: {
-          'todo': function(){
-              new_game(false);
-          },
-        },
+      },
+      'reset': function(){
+          new_game(false);
       },
       'storage': {
         'max': 1000000,
