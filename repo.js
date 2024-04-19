@@ -11,15 +11,18 @@ function guess(){
     );
 
     if(Number.isNaN(guessvalue)
-      || guessvalue.length < 1
-      || guessvalue > core_storage_data['max']
+      || guessvalue.length < 1){
+        document.getElementById('info').textContent = 'Invalid integer';
+        return;
+    }
+
+    if(guessvalue > core_storage_data['max']
       || guessvalue < core_storage_data['min']){
-        document.getElementById('info').textContent = 'Invalid integer.';
+        document.getElementById('info').textContent = 'Integer must be between ' + core_storage_data['min'] + ' and ' + core_storage_data['max'];
         return;
     }
 
     let result = '';
-
     if(guessvalue > value){
         result = 'LOWER';
 
