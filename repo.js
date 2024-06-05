@@ -6,40 +6,44 @@ function guess(){
     }
 
     const guessvalue = Number.parseInt(
-      document.getElementById('guess-input').value,
+      core_elements['guess-input'].value,
       10
     );
 
+    let result = '';
     if(Number.isNaN(guessvalue)
       || guessvalue.length < 1){
-        document.getElementById('info').textContent = 'Invalid integer';
-        return;
+        result = 'Invalid integer';
     }
 
     if(guessvalue > core_storage_data['max']
       || guessvalue < core_storage_data['min']){
-        document.getElementById('info').textContent = 'Integer must be between ' + core_storage_data['min'] + ' and ' + core_storage_data['max'];
-        return;
+        result = 'Integer must be between ' + core_storage_data['min'] + ' and ' + core_storage_data['max'];
     }
 
-    let result = '';
-    if(guessvalue > value){
-        result = 'LOWER';
+    if(result.length === 0){
+        if(guessvalue > value){
+            result = 'LOWER';
 
-    }else if(guessvalue < value){
-        result = 'HIGHER';
+        }else if(guessvalue < value){
+            result = 'HIGHER';
 
-    }else{
-        guessing = false;
-        result = 'CORRECT! YOU WIN!';
+        }else{
+            guessing = false;
+            result = 'CORRECT! YOU WIN!';
+        }
     }
 
-    const element = document.getElementById('guesses');
-    element.textContent = Number.parseInt(
-      element.textContent,
-      10
-    ) + 1;
-    document.getElementById('info').textContent = result;
+    core_ui_update({
+      'ids': {
+        'guesses': Number.parseInt(
+          core_elements['guesses'].textContent,
+          10
+        ) + 1,
+        'info': result,
+      },
+    });
+    core_elements['guess-input'].focus();
 }
 
 function new_game(skip){
@@ -48,9 +52,14 @@ function new_game(skip){
         return;
     }
 
-    document.getElementById('guess-input').value = '';
-    document.getElementById('guesses').textContent = 0;
-    document.getElementById('info').textContent = '';
+    core_ui_update({
+      'ids': {
+        'guesses': 0,
+        'info': '',
+      },
+    });
+    core_elements['guess-input'].value = '';
+    core_elements['guess-input'].focus();
     guessing = true;
 
     value = core_random_integer({
@@ -87,6 +96,9 @@ function repo_init(){
       'storage-menu': '<table><tr><td><input id=max step=any type=number><td>Max'
         + '<tr><td><input id=min step=any type=number><td>Min</table>',
       'title': 'Guess.htm',
+      'ui-elements': [
+        'guess-input',
+      ],
     });
 
     new_game(true);
