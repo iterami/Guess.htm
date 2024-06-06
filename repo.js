@@ -11,7 +11,7 @@ function guess(){
     );
 
     let result = '';
-    if(Number.isNaN(guessvalue)
+    if(globalThis.isNaN(guessvalue)
       || guessvalue.length < 1){
         result = 'Invalid integer';
     }
