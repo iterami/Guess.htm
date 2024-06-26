@@ -62,9 +62,9 @@ function new_game(skip){
     core_elements['guess-input'].focus();
     guessing = true;
 
-    value = core_random_integer({
+    value = Math.floor(core_random_integer({
       'max': core_storage_data['max'] - core_storage_data['min'],
-    }) + core_storage_data['min'];
+    }) + core_storage_data['min']);
 }
 
 function repo_init(){
@@ -93,8 +93,8 @@ function repo_init(){
         'max': 1000000,
         'min': 1,
       },
-      'storage-menu': '<table><tr><td><input id=max step=any type=number><td>Max'
-        + '<tr><td><input id=min step=any type=number><td>Min</table>',
+      'storage-menu': '<table><tr><td><input id=max step=1 type=number><td>Max'
+        + '<tr><td><input id=min step=1 type=number><td>Min</table>',
       'title': 'Guess.htm',
       'ui-elements': [
         'guess-input',
