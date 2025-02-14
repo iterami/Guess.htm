@@ -18,7 +18,13 @@ function guess(){
 
     if(guessvalue > core_storage_data['max']
       || guessvalue < core_storage_data['min']){
-        result = 'Integer must be between ' + core_storage_data['min'] + ' and ' + core_storage_data['max'];
+        result = 'Integer must be between ' + core_number_format({
+            'decimals-max': 0,
+            'number': core_storage_data['min'],
+          }) + ' and ' + core_number_format({
+            'decimals-max': 0,
+            'number': core_storage_data['max'],
+          });
     }
 
     if(result.length === 0){
