@@ -32,14 +32,13 @@ function guess(){
             guessing = false;
             result = 'CORRECT! YOU WIN!';
         }
+
+        guesses++;
     }
 
     core_ui_update({
       'ids': {
-        'guesses': Number.parseInt(
-          core_elements['guesses'].textContent,
-          10
-        ) + 1,
+        'guesses': guesses,
         'info': result,
       },
     });
@@ -60,6 +59,7 @@ function new_game(skip){
     });
     core_elements['guess-input'].value = '';
     core_elements['guess-input'].focus();
+    guesses = 0;
     guessing = true;
 
     value = Math.floor(core_random_integer({
@@ -78,6 +78,7 @@ function repo_init(){
         },
       },
       'globals': {
+        'guesses': 0,
         'guessing': true,
         'value': 0,
       },
