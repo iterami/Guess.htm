@@ -1,12 +1,12 @@
 'use strict';
 
-function guess(){
-    if(!guessing){
+function guess(id, min, max){
+    if(core_elements['info-' + id].textContent.length === 17){
         return;
     }
 
     const guessvalue = Number.parseInt(
-      core_elements['guess-input'].value,
+      core_elements[id].value,
       10
     );
 
@@ -16,94 +16,131 @@ function guess(){
         result = 'Invalid integer';
     }
 
-    if(guessvalue > core_storage_data['max']
-      || guessvalue < core_storage_data['min']){
-        result = 'Integer must be between ' + core_number_format({
-            'decimals-max': 0,
-            'number': core_storage_data['min'],
-          }) + ' and ' + core_number_format({
-            'decimals-max': 0,
-            'number': core_storage_data['max'],
-          });
+    if(guessvalue < min
+      || guessvalue > max){
+        result = 'Integer must be between ' + min + ' and ' + max;
     }
 
     if(result.length === 0){
-        if(guessvalue > value){
+        if(guessvalue > globalThis[id]){
             result = 'LOWER';
 
-        }else if(guessvalue < value){
+        }else if(guessvalue < globalThis[id]){
             result = 'HIGHER';
 
         }else{
-            guessing = false;
             result = 'CORRECT! YOU WIN!';
         }
 
-        guesses++;
+        globalThis['guesses_' + id]++;
     }
 
     core_ui_update({
       'ids': {
-        'guesses': guesses,
-        'info': result,
+        ['guesses-' + id]: globalThis['guesses_' + id],
+        ['info-' + id]: result,
       },
     });
-    core_elements['guess-input'].focus();
+    core_elements[id].focus();
 }
 
-function new_game(){
-    if(guesses > 0
-      && !globalThis.confirm('Start new game?')){
+function new_game(type){
+    if(globalThis['guesses_' + type] > 0
+      && !globalThis.confirm('Generate new ' + type + ' to guess?')){
         return;
     }
 
     core_ui_update({
       'ids': {
-        'guesses': 0,
-        'info': '',
+        ['guesses-' + type]: 0,
+        ['info-' + type]: '',
       },
     });
-    core_elements['guess-input'].value = '';
-    core_elements['guess-input'].focus();
-    guesses = 0;
-    guessing = true;
+    core_elements[type].value = '';
+    core_elements[type].focus();
+    globalThis['guesses_' + type] = 0;
 
-    value = Math.floor(core_random_integer({
-      'max': core_storage_data['max'] - core_storage_data['min'],
-    }) + core_storage_data['min']);
+    if(type === 'angle'){
+        angle = core_random_integer({
+          'max': 360,
+        });
+        const first = core_random_integer({
+          'max': 360,
+        });
+        const second = first + angle;
+
+        core_elements['angle-0'].style.transform = 'rotate(' + first + 'deg)';
+        core_elements['angle-1'].style.transform = 'rotate(' + second + 'deg)';
+
+    }else{
+        number = Math.floor(core_random_integer({
+          'max': core_storage_data['max'] - core_storage_data['min'],
+        }) + core_storage_data['min']);
+    }
 }
 
 function repo_init(){
     core_repo_init({
       'events': {
-        'guess-button': {
-          'onclick': guess,
+        'angle-button': {
+          'onclick': function(){
+              guess('angle', 1, 359);
+          },
         },
-        'new-game': {
-          'onclick': new_game,
+        'new-angle': {
+          'onclick': function(){
+              new_game('angle');
+          },
+        },
+        'new-number': {
+          'onclick': function(){
+              new_game('number');
+          },
+        },
+        'number-button': {
+          'onclick': function(){
+              guess('number', core_storage_data['min'], core_storage_data['max']);
+          },
         },
       },
       'globals': {
-        'guesses': 0,
-        'guessing': true,
-        'value': 0,
+        'angle': 0,
+        'guesses_angle': 0,
+        'guesses_number': 0,
+        'number': 0,
       },
       'keybinds': {
         'Enter': {
-          'todo': guess,
+          'todo': function(){
+          },
         },
       },
       'storage': {
         'max': 1000000,
         'min': 1,
       },
-      'storage-menu': '<table><tr><td><input id=max step=1 type=number><td>Max'
-        + '<tr><td><input id=min step=1 type=number><td>Min</table>',
       'title': 'Guess.htm',
       'ui-elements': [
-        'guess-input',
+        'angle-0',
+        'angle-1',
+        'angle',
+        'number',
       ],
     });
 
-    new_game();
+    for(let i = 0; i < 2; i++){
+        const style = core_elements['angle-' + i].style;
+        style.backgroundColor = '#0f0';
+        style.height = '5px';
+        style.left = '50%';
+        style.position = 'absolute';
+        style.top = '250px';
+        style.transformOrigin = 'left';
+        style.width = '100px';
+    }
+    core_elements['angle-0'].style.borderTop = '5px solid #00f';
+    core_elements['angle-1'].style.borderBottom = '5px solid #00f';
+
+    new_game('angle');
+    new_game('number');
 }

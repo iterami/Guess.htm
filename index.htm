@@ -4,9 +4,17 @@
 <title>Guess.htm</title>
 <link href=../common/css/core.css rel=stylesheet>
 
-<span id=guesses></span>
-<input id=guess-input step=1 type=number><button id=guess-button type=button>Guess [ENTER]</button><button id=new-game type=button>New Game</button>
-<div id=info></div>
+<table>
+  <tr>
+    <td id=guesses-number>
+    <td><input id=number step=1 type=number><div id=info-number></div>
+    <td><button id=number-button type=button>Guess Number</button><button id=new-number type=button>New Number</button><table><tr><td><input id=max step=1 type=number><td>Max<tr><td><input id=min step=1 type=number><td>Min</table>
+  <tr>
+    <td id=guesses-angle>
+    <td><input id=angle step=1 type=number><div id=info-angle></div>
+    <td><button id=angle-button type=button>Guess Angle</button><button id=new-angle type=button>New Angle</button>
+</table>
+<div id=angle-0></div><div id=angle-1></div>
 
 <script src=../common/js/core.js></script>
 <script src=repo.js></script>
