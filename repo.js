@@ -51,8 +51,8 @@ function guess(){
     core_elements['guess-input'].focus();
 }
 
-function new_game(skip){
-    if(!skip
+function new_game(){
+    if(guesses > 0
       && !globalThis.confirm('Start new game?')){
         return;
     }
@@ -80,9 +80,7 @@ function repo_init(){
           'onclick': guess,
         },
         'new-game': {
-          'onclick': function(){
-              new_game(false);
-          },
+          'onclick': new_game,
         },
       },
       'globals': {
@@ -107,5 +105,5 @@ function repo_init(){
       ],
     });
 
-    new_game(true);
+    new_game();
 }
