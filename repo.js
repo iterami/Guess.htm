@@ -44,6 +44,14 @@ function guess(id, min, max){
     core_elements[id].focus();
 }
 
+function guess_angle(){
+    guess('angle', 1, 359);
+}
+
+function guess_number(){
+    guess('number', core_storage_data['min'], core_storage_data['max']);
+}
+
 function new_game(type){
     if(globalThis['guesses_' + type] > 0
       && !globalThis.confirm('Generate new ' + type + ' to guess?')){
@@ -83,9 +91,7 @@ function repo_init(){
     core_repo_init({
       'events': {
         'angle-button': {
-          'onclick': function(){
-              guess('angle', 1, 359);
-          },
+          'onclick': guess_angle,
         },
         'new-angle': {
           'onclick': function(){
@@ -98,9 +104,7 @@ function repo_init(){
           },
         },
         'number-button': {
-          'onclick': function(){
-              guess('number', core_storage_data['min'], core_storage_data['max']);
-          },
+          'onclick': guess_number,
         },
       },
       'globals': {
@@ -112,6 +116,13 @@ function repo_init(){
       'keybinds': {
         'Enter': {
           'todo': function(){
+              const id = document.activeElement.id;
+              if(id === 'angle'){
+                  guess_angle();
+
+              }else if(id === 'number'){
+                  guess_number();
+              }
           },
         },
       },
@@ -131,12 +142,13 @@ function repo_init(){
     for(let i = 0; i < 2; i++){
         const style = core_elements['angle-' + i].style;
         style.backgroundColor = '#0f0';
+        style.display = 'inline-block';
         style.height = '5px';
-        style.left = '50%';
-        style.position = 'absolute';
-        style.top = '250px';
+        style.left = 50 * (1 - i) + 'px';
+        style.position = 'relative';
+        style.top = '25px';
         style.transformOrigin = 'left';
-        style.width = '100px';
+        style.width = '50px';
     }
     core_elements['angle-0'].style.borderTop = '5px solid #00f';
     core_elements['angle-1'].style.borderBottom = '5px solid #00f';
