@@ -69,21 +69,15 @@ function new_game(type){
     globalThis['guesses_' + type] = 0;
 
     if(type === 'angle'){
-        angle = core_random_integer({
-          'max': 360,
-        });
-        const first = core_random_integer({
-          'max': 360,
-        });
+        angle = core_random_integer(360);
+        const first = core_random_integer(360);
         const second = first + angle;
 
         core_elements['angle-0'].style.transform = 'rotate(' + first + 'deg)';
         core_elements['angle-1'].style.transform = 'rotate(' + second + 'deg)';
 
     }else{
-        number = Math.floor(core_random_integer({
-          'max': core_storage_data['max'] - core_storage_data['min'],
-        }) + core_storage_data['min']);
+        number = Math.floor(core_random_integer(core_storage_data['max'] - core_storage_data['min']) + core_storage_data['min']);
     }
 }
 
