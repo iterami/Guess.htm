@@ -1,7 +1,7 @@
 'use strict';
 
 function guess(id, min, max){
-    if(core_elements['info-' + id].textContent.length === 17){
+    if(core_elements['info_' + id].textContent.length === 17){
         return;
     }
 
@@ -37,8 +37,8 @@ function guess(id, min, max){
 
     core_ui_update({
       'ids': {
-        ['guesses-' + id]: globalThis['guesses_' + id],
-        ['info-' + id]: result,
+        ['guesses_' + id]: globalThis['guesses_' + id],
+        ['info_' + id]: result,
       },
     });
     core_elements[id].focus();
@@ -49,7 +49,7 @@ function guess_angle(){
 }
 
 function guess_number(){
-    guess('number', core_storage_data['min'], core_storage_data['max']);
+    guess('number', core_storage_data.min, core_storage_data.max);
 }
 
 function new_game(type){
@@ -60,8 +60,8 @@ function new_game(type){
 
     core_ui_update({
       'ids': {
-        ['guesses-' + type]: 0,
-        ['info-' + type]: '',
+        ['guesses_' + type]: 0,
+        ['info_' + type]: '',
       },
     });
     core_elements[type].value = '';
@@ -73,31 +73,31 @@ function new_game(type){
         const first = core_random_integer(360);
         const second = first + angle;
 
-        core_elements['angle-0'].style.transform = 'rotate(' + first + 'deg)';
-        core_elements['angle-1'].style.transform = 'rotate(' + second + 'deg)';
+        core_elements.angle_0.style.transform = 'rotate(' + first + 'deg)';
+        core_elements.angle_1.style.transform = 'rotate(' + second + 'deg)';
 
     }else{
-        number = Math.floor(core_random_integer(core_storage_data['max'] - core_storage_data['min']) + core_storage_data['min']);
+        number = Math.floor(core_random_integer(core_storage_data.max - core_storage_data.min) + core_storage_data.min);
     }
 }
 
 function repo_init(){
     core_repo_init({
       'events': {
-        'angle-button': {
+        'angle_button': {
           'onclick': guess_angle,
         },
-        'new-angle': {
+        'new_angle': {
           'onclick': function(){
               new_game('angle');
           },
         },
-        'new-number': {
+        'new_number': {
           'onclick': function(){
               new_game('number');
           },
         },
-        'number-button': {
+        'number_button': {
           'onclick': guess_number,
         },
       },
@@ -126,15 +126,15 @@ function repo_init(){
       },
       'title': 'Guess.htm',
       'ui-elements': [
-        'angle-0',
-        'angle-1',
+        'angle_0',
+        'angle_1',
         'angle',
         'number',
       ],
     });
 
     for(let i = 0; i < 2; i++){
-        const style = core_elements['angle-' + i].style;
+        const style = core_elements['angle_' + i].style;
         style.backgroundColor = '#0f0';
         style.display = 'inline-block';
         style.height = '5px';
@@ -144,8 +144,8 @@ function repo_init(){
         style.transformOrigin = 'left';
         style.width = '50px';
     }
-    core_elements['angle-0'].style.borderTop = '5px solid #00f';
-    core_elements['angle-1'].style.borderBottom = '5px solid #00f';
+    core_elements.angle_0.style.borderTop = '5px solid #00f';
+    core_elements.angle_1.style.borderBottom = '5px solid #00f';
 
     new_game('angle');
     new_game('number');
