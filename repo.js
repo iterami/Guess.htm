@@ -125,7 +125,7 @@ function repo_init(){
         'min': 1,
       },
       'title': 'Guess.htm',
-      'ui-elements': [
+      'ui_elements': [
         'angle_0',
         'angle_1',
         'angle',
