@@ -109,7 +109,7 @@ function repo_init(){
       },
       'keybinds': {
         'Enter': {
-          'todo': function(){
+          'down': function(){
               const id = document.activeElement.id;
               if(id === 'angle'){
                   guess_angle();
